@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 {
     shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
     socket->open();
-    shared_ptr<TJSONProtocol> inputProtocol(new TJSONProtocol(socket));
+    shared_ptr<TBinaryProtocol> inputProtocol(new TBinaryProtocol(socket));
     shared_ptr<TJSONProtocol> outputProtocol(new TJSONProtocol(socket));
     CalculatorClient client(inputProtocol, outputProtocol);
     Operation o;
