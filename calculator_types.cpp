@@ -10,6 +10,138 @@
 
 namespace foo { namespace bar { namespace baz {
 
+int _kOperationTypeValues[] = {
+  OperationType::ADD,
+  OperationType::SUBTRACT,
+  OperationType::MULTIPLY,
+  OperationType::DIVIDE
+};
+const char* _kOperationTypeNames[] = {
+  "ADD",
+  "SUBTRACT",
+  "MULTIPLY",
+  "DIVIDE"
+};
+const std::map<int, const char*> _OperationType_VALUES_TO_NAMES(::apache::thrift::TEnumIterator(4, _kOperationTypeValues, _kOperationTypeNames), ::apache::thrift::TEnumIterator(-1, NULL, NULL));
+
+
+Operation::~Operation() throw() {
+}
+
+
+void Operation::__set_type(const OperationType::type val) {
+  type = val;
+}
+
+void Operation::__set_op1(const double val) {
+  op1 = val;
+}
+
+void Operation::__set_op2(const double val) {
+  op2 = val;
+}
+
+const char* Operation::ascii_fingerprint = "BDDE057032F8705658D01BF0018FBBF5";
+const uint8_t Operation::binary_fingerprint[16] = {0xBD,0xDE,0x05,0x70,0x32,0xF8,0x70,0x56,0x58,0xD0,0x1B,0xF0,0x01,0x8F,0xBB,0xF5};
+
+uint32_t Operation::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          int32_t ecast0;
+          xfer += iprot->readI32(ecast0);
+          this->type = (OperationType::type)ecast0;
+          this->__isset.type = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
+          xfer += iprot->readDouble(this->op1);
+          this->__isset.op1 = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
+          xfer += iprot->readDouble(this->op2);
+          this->__isset.op2 = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t Operation::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("Operation");
+
+  xfer += oprot->writeFieldBegin("type", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((int32_t)this->type);
+  xfer += oprot->writeFieldEnd();
+
+  xfer += oprot->writeFieldBegin("op1", ::apache::thrift::protocol::T_DOUBLE, 2);
+  xfer += oprot->writeDouble(this->op1);
+  xfer += oprot->writeFieldEnd();
+
+  xfer += oprot->writeFieldBegin("op2", ::apache::thrift::protocol::T_DOUBLE, 3);
+  xfer += oprot->writeDouble(this->op2);
+  xfer += oprot->writeFieldEnd();
+
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+void swap(Operation &a, Operation &b) {
+  using ::std::swap;
+  swap(a.type, b.type);
+  swap(a.op1, b.op1);
+  swap(a.op2, b.op2);
+  swap(a.__isset, b.__isset);
+}
+
+Operation::Operation(const Operation& other1) {
+  type = other1.type;
+  op1 = other1.op1;
+  op2 = other1.op2;
+}
+Operation& Operation::operator=(const Operation& other2) {
+  type = other2.type;
+  op1 = other2.op1;
+  op2 = other2.op2;
+  return *this;
+}
 
 ArithmeticException::~ArithmeticException() throw() {
 }
@@ -81,11 +213,89 @@ void swap(ArithmeticException &a, ArithmeticException &b) {
   swap(a.__isset, b.__isset);
 }
 
-ArithmeticException::ArithmeticException(const ArithmeticException& other0) {
-  message = other0.message;
+ArithmeticException::ArithmeticException(const ArithmeticException& other3) {
+  message = other3.message;
 }
-ArithmeticException& ArithmeticException::operator=(const ArithmeticException& other1) {
-  message = other1.message;
+ArithmeticException& ArithmeticException::operator=(const ArithmeticException& other4) {
+  message = other4.message;
+  return *this;
+}
+
+IllegalArgumentException::~IllegalArgumentException() throw() {
+}
+
+
+void IllegalArgumentException::__set_message(const std::string& val) {
+  message = val;
+}
+
+const char* IllegalArgumentException::ascii_fingerprint = "EFB929595D312AC8F305D5A794CFEDA1";
+const uint8_t IllegalArgumentException::binary_fingerprint[16] = {0xEF,0xB9,0x29,0x59,0x5D,0x31,0x2A,0xC8,0xF3,0x05,0xD5,0xA7,0x94,0xCF,0xED,0xA1};
+
+uint32_t IllegalArgumentException::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRING) {
+          xfer += iprot->readString(this->message);
+          this->__isset.message = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t IllegalArgumentException::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("IllegalArgumentException");
+
+  xfer += oprot->writeFieldBegin("message", ::apache::thrift::protocol::T_STRING, 1);
+  xfer += oprot->writeString(this->message);
+  xfer += oprot->writeFieldEnd();
+
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+void swap(IllegalArgumentException &a, IllegalArgumentException &b) {
+  using ::std::swap;
+  swap(a.message, b.message);
+  swap(a.__isset, b.__isset);
+}
+
+IllegalArgumentException::IllegalArgumentException(const IllegalArgumentException& other5) {
+  message = other5.message;
+}
+IllegalArgumentException& IllegalArgumentException::operator=(const IllegalArgumentException& other6) {
+  message = other6.message;
   return *this;
 }
 }}} // namespace

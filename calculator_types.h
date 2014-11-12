@@ -17,7 +17,76 @@
 
 namespace foo { namespace bar { namespace baz {
 
+struct OperationType {
+  enum type {
+    ADD = 0,
+    SUBTRACT = 1,
+    MULTIPLY = 2,
+    DIVIDE = 3
+  };
+};
+
+extern const std::map<int, const char*> _OperationType_VALUES_TO_NAMES;
+
+class Operation;
+
 class ArithmeticException;
+
+class IllegalArgumentException;
+
+typedef struct _Operation__isset {
+  _Operation__isset() : type(false), op1(false), op2(false) {}
+  bool type;
+  bool op1;
+  bool op2;
+} _Operation__isset;
+
+class Operation {
+ public:
+
+  static const char* ascii_fingerprint; // = "BDDE057032F8705658D01BF0018FBBF5";
+  static const uint8_t binary_fingerprint[16]; // = {0xBD,0xDE,0x05,0x70,0x32,0xF8,0x70,0x56,0x58,0xD0,0x1B,0xF0,0x01,0x8F,0xBB,0xF5};
+
+  Operation(const Operation&);
+  Operation& operator=(const Operation&);
+  Operation() : type((OperationType::type)0), op1(0), op2(0) {
+  }
+
+  virtual ~Operation() throw();
+  OperationType::type type;
+  double op1;
+  double op2;
+
+  _Operation__isset __isset;
+
+  void __set_type(const OperationType::type val);
+
+  void __set_op1(const double val);
+
+  void __set_op2(const double val);
+
+  bool operator == (const Operation & rhs) const
+  {
+    if (!(type == rhs.type))
+      return false;
+    if (!(op1 == rhs.op1))
+      return false;
+    if (!(op2 == rhs.op2))
+      return false;
+    return true;
+  }
+  bool operator != (const Operation &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const Operation & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+void swap(Operation &a, Operation &b);
 
 typedef struct _ArithmeticException__isset {
   _ArithmeticException__isset() : message(false) {}
@@ -60,6 +129,48 @@ class ArithmeticException : public ::apache::thrift::TException {
 };
 
 void swap(ArithmeticException &a, ArithmeticException &b);
+
+typedef struct _IllegalArgumentException__isset {
+  _IllegalArgumentException__isset() : message(false) {}
+  bool message;
+} _IllegalArgumentException__isset;
+
+class IllegalArgumentException : public ::apache::thrift::TException {
+ public:
+
+  static const char* ascii_fingerprint; // = "EFB929595D312AC8F305D5A794CFEDA1";
+  static const uint8_t binary_fingerprint[16]; // = {0xEF,0xB9,0x29,0x59,0x5D,0x31,0x2A,0xC8,0xF3,0x05,0xD5,0xA7,0x94,0xCF,0xED,0xA1};
+
+  IllegalArgumentException(const IllegalArgumentException&);
+  IllegalArgumentException& operator=(const IllegalArgumentException&);
+  IllegalArgumentException() : message() {
+  }
+
+  virtual ~IllegalArgumentException() throw();
+  std::string message;
+
+  _IllegalArgumentException__isset __isset;
+
+  void __set_message(const std::string& val);
+
+  bool operator == (const IllegalArgumentException & rhs) const
+  {
+    if (!(message == rhs.message))
+      return false;
+    return true;
+  }
+  bool operator != (const IllegalArgumentException &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const IllegalArgumentException & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+void swap(IllegalArgumentException &a, IllegalArgumentException &b);
 
 }}} // namespace
 

@@ -9,11 +9,11 @@
 namespace foo { namespace bar { namespace baz {
 
 
-Calculator_add_args::~Calculator_add_args() throw() {
+Calculator_perform_args::~Calculator_perform_args() throw() {
 }
 
 
-uint32_t Calculator_add_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t Calculator_perform_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -34,17 +34,9 @@ uint32_t Calculator_add_args::read(::apache::thrift::protocol::TProtocol* iprot)
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->a);
-          this->__isset.a = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->b);
-          this->__isset.b = true;
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->o.read(iprot);
+          this->__isset.o = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -61,16 +53,12 @@ uint32_t Calculator_add_args::read(::apache::thrift::protocol::TProtocol* iprot)
   return xfer;
 }
 
-uint32_t Calculator_add_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t Calculator_perform_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_add_args");
+  xfer += oprot->writeStructBegin("Calculator_perform_args");
 
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble(this->a);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble(this->b);
+  xfer += oprot->writeFieldBegin("o", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->o.write(oprot);
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -79,20 +67,16 @@ uint32_t Calculator_add_args::write(::apache::thrift::protocol::TProtocol* oprot
 }
 
 
-Calculator_add_pargs::~Calculator_add_pargs() throw() {
+Calculator_perform_pargs::~Calculator_perform_pargs() throw() {
 }
 
 
-uint32_t Calculator_add_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t Calculator_perform_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_add_pargs");
+  xfer += oprot->writeStructBegin("Calculator_perform_pargs");
 
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble((*(this->a)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble((*(this->b)));
+  xfer += oprot->writeFieldBegin("o", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->o)).write(oprot);
   xfer += oprot->writeFieldEnd();
 
   xfer += oprot->writeFieldStop();
@@ -101,605 +85,11 @@ uint32_t Calculator_add_pargs::write(::apache::thrift::protocol::TProtocol* opro
 }
 
 
-Calculator_add_result::~Calculator_add_result() throw() {
+Calculator_perform_result::~Calculator_perform_result() throw() {
 }
 
 
-uint32_t Calculator_add_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_add_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("Calculator_add_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_DOUBLE, 0);
-    xfer += oprot->writeDouble(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_add_presult::~Calculator_add_presult() throw() {
-}
-
-
-uint32_t Calculator_add_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-
-Calculator_sub_args::~Calculator_sub_args() throw() {
-}
-
-
-uint32_t Calculator_sub_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->a);
-          this->__isset.a = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->b);
-          this->__isset.b = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_sub_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_sub_args");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble(this->a);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble(this->b);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_sub_pargs::~Calculator_sub_pargs() throw() {
-}
-
-
-uint32_t Calculator_sub_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_sub_pargs");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble((*(this->a)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble((*(this->b)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_sub_result::~Calculator_sub_result() throw() {
-}
-
-
-uint32_t Calculator_sub_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_sub_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("Calculator_sub_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_DOUBLE, 0);
-    xfer += oprot->writeDouble(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_sub_presult::~Calculator_sub_presult() throw() {
-}
-
-
-uint32_t Calculator_sub_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-
-Calculator_mul_args::~Calculator_mul_args() throw() {
-}
-
-
-uint32_t Calculator_mul_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->a);
-          this->__isset.a = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->b);
-          this->__isset.b = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_mul_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_mul_args");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble(this->a);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble(this->b);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_mul_pargs::~Calculator_mul_pargs() throw() {
-}
-
-
-uint32_t Calculator_mul_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_mul_pargs");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble((*(this->a)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble((*(this->b)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_mul_result::~Calculator_mul_result() throw() {
-}
-
-
-uint32_t Calculator_mul_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_mul_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("Calculator_mul_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_DOUBLE, 0);
-    xfer += oprot->writeDouble(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_mul_presult::~Calculator_mul_presult() throw() {
-}
-
-
-uint32_t Calculator_mul_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-
-Calculator_div_args::~Calculator_div_args() throw() {
-}
-
-
-uint32_t Calculator_div_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->a);
-          this->__isset.a = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_DOUBLE) {
-          xfer += iprot->readDouble(this->b);
-          this->__isset.b = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t Calculator_div_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_div_args");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble(this->a);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble(this->b);
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_div_pargs::~Calculator_div_pargs() throw() {
-}
-
-
-uint32_t Calculator_div_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("Calculator_div_pargs");
-
-  xfer += oprot->writeFieldBegin("a", ::apache::thrift::protocol::T_DOUBLE, 1);
-  xfer += oprot->writeDouble((*(this->a)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldBegin("b", ::apache::thrift::protocol::T_DOUBLE, 2);
-  xfer += oprot->writeDouble((*(this->b)));
-  xfer += oprot->writeFieldEnd();
-
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-
-Calculator_div_result::~Calculator_div_result() throw() {
-}
-
-
-uint32_t Calculator_div_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t Calculator_perform_result::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -747,11 +137,11 @@ uint32_t Calculator_div_result::read(::apache::thrift::protocol::TProtocol* ipro
   return xfer;
 }
 
-uint32_t Calculator_div_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+uint32_t Calculator_perform_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
 
   uint32_t xfer = 0;
 
-  xfer += oprot->writeStructBegin("Calculator_div_result");
+  xfer += oprot->writeStructBegin("Calculator_perform_result");
 
   if (this->__isset.success) {
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_DOUBLE, 0);
@@ -768,11 +158,11 @@ uint32_t Calculator_div_result::write(::apache::thrift::protocol::TProtocol* opr
 }
 
 
-Calculator_div_presult::~Calculator_div_presult() throw() {
+Calculator_perform_presult::~Calculator_perform_presult() throw() {
 }
 
 
-uint32_t Calculator_div_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+uint32_t Calculator_perform_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -820,20 +210,19 @@ uint32_t Calculator_div_presult::read(::apache::thrift::protocol::TProtocol* ipr
   return xfer;
 }
 
-double CalculatorClient::add(const double a, const double b)
+double CalculatorClient::perform(const Operation& o)
 {
-  send_add(a, b);
-  return recv_add();
+  send_perform(o);
+  return recv_perform();
 }
 
-void CalculatorClient::send_add(const double a, const double b)
+void CalculatorClient::send_perform(const Operation& o)
 {
   int32_t cseqid = 0;
-  oprot_->writeMessageBegin("add", ::apache::thrift::protocol::T_CALL, cseqid);
+  oprot_->writeMessageBegin("perform", ::apache::thrift::protocol::T_CALL, cseqid);
 
-  Calculator_add_pargs args;
-  args.a = &a;
-  args.b = &b;
+  Calculator_perform_pargs args;
+  args.o = &o;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -841,7 +230,7 @@ void CalculatorClient::send_add(const double a, const double b)
   oprot_->getTransport()->flush();
 }
 
-double CalculatorClient::recv_add()
+double CalculatorClient::recv_perform()
 {
 
   int32_t rseqid = 0;
@@ -861,190 +250,13 @@ double CalculatorClient::recv_add()
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
-  if (fname.compare("add") != 0) {
+  if (fname.compare("perform") != 0) {
     iprot_->skip(::apache::thrift::protocol::T_STRUCT);
     iprot_->readMessageEnd();
     iprot_->getTransport()->readEnd();
   }
   double _return;
-  Calculator_add_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "add failed: unknown result");
-}
-
-double CalculatorClient::sub(const double a, const double b)
-{
-  send_sub(a, b);
-  return recv_sub();
-}
-
-void CalculatorClient::send_sub(const double a, const double b)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("sub", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  Calculator_sub_pargs args;
-  args.a = &a;
-  args.b = &b;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->writeEnd();
-  oprot_->getTransport()->flush();
-}
-
-double CalculatorClient::recv_sub()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  if (fname.compare("sub") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  double _return;
-  Calculator_sub_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "sub failed: unknown result");
-}
-
-double CalculatorClient::mul(const double a, const double b)
-{
-  send_mul(a, b);
-  return recv_mul();
-}
-
-void CalculatorClient::send_mul(const double a, const double b)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("mul", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  Calculator_mul_pargs args;
-  args.a = &a;
-  args.b = &b;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->writeEnd();
-  oprot_->getTransport()->flush();
-}
-
-double CalculatorClient::recv_mul()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  if (fname.compare("mul") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  double _return;
-  Calculator_mul_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "mul failed: unknown result");
-}
-
-double CalculatorClient::div(const double a, const double b)
-{
-  send_div(a, b);
-  return recv_div();
-}
-
-void CalculatorClient::send_div(const double a, const double b)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("div", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  Calculator_div_pargs args;
-  args.a = &a;
-  args.b = &b;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->writeEnd();
-  oprot_->getTransport()->flush();
-}
-
-double CalculatorClient::recv_div()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  if (fname.compare("div") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  double _return;
-  Calculator_div_presult result;
+  Calculator_perform_presult result;
   result.success = &_return;
   result.read(iprot_);
   iprot_->readMessageEnd();
@@ -1056,7 +268,7 @@ double CalculatorClient::recv_div()
   if (result.__isset.e) {
     throw result.e;
   }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "div failed: unknown result");
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "perform failed: unknown result");
 }
 
 bool CalculatorProcessor::dispatchCall(::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, const std::string& fname, int32_t seqid, void* callContext) {
@@ -1078,203 +290,41 @@ bool CalculatorProcessor::dispatchCall(::apache::thrift::protocol::TProtocol* ip
   return true;
 }
 
-void CalculatorProcessor::process_add(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+void CalculatorProcessor::process_perform(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = NULL;
   if (this->eventHandler_.get() != NULL) {
-    ctx = this->eventHandler_->getContext("Calculator.add", callContext);
+    ctx = this->eventHandler_->getContext("Calculator.perform", callContext);
   }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Calculator.add");
+  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Calculator.perform");
 
   if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preRead(ctx, "Calculator.add");
+    this->eventHandler_->preRead(ctx, "Calculator.perform");
   }
 
-  Calculator_add_args args;
+  Calculator_perform_args args;
   args.read(iprot);
   iprot->readMessageEnd();
   uint32_t bytes = iprot->getTransport()->readEnd();
 
   if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postRead(ctx, "Calculator.add", bytes);
+    this->eventHandler_->postRead(ctx, "Calculator.perform", bytes);
   }
 
-  Calculator_add_result result;
+  Calculator_perform_result result;
   try {
-    result.success = iface_->add(args.a, args.b);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    if (this->eventHandler_.get() != NULL) {
-      this->eventHandler_->handlerError(ctx, "Calculator.add");
-    }
-
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("add", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->writeEnd();
-    oprot->getTransport()->flush();
-    return;
-  }
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preWrite(ctx, "Calculator.add");
-  }
-
-  oprot->writeMessageBegin("add", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  bytes = oprot->getTransport()->writeEnd();
-  oprot->getTransport()->flush();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postWrite(ctx, "Calculator.add", bytes);
-  }
-}
-
-void CalculatorProcessor::process_sub(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
-{
-  void* ctx = NULL;
-  if (this->eventHandler_.get() != NULL) {
-    ctx = this->eventHandler_->getContext("Calculator.sub", callContext);
-  }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Calculator.sub");
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preRead(ctx, "Calculator.sub");
-  }
-
-  Calculator_sub_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  uint32_t bytes = iprot->getTransport()->readEnd();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postRead(ctx, "Calculator.sub", bytes);
-  }
-
-  Calculator_sub_result result;
-  try {
-    result.success = iface_->sub(args.a, args.b);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    if (this->eventHandler_.get() != NULL) {
-      this->eventHandler_->handlerError(ctx, "Calculator.sub");
-    }
-
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("sub", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->writeEnd();
-    oprot->getTransport()->flush();
-    return;
-  }
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preWrite(ctx, "Calculator.sub");
-  }
-
-  oprot->writeMessageBegin("sub", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  bytes = oprot->getTransport()->writeEnd();
-  oprot->getTransport()->flush();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postWrite(ctx, "Calculator.sub", bytes);
-  }
-}
-
-void CalculatorProcessor::process_mul(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
-{
-  void* ctx = NULL;
-  if (this->eventHandler_.get() != NULL) {
-    ctx = this->eventHandler_->getContext("Calculator.mul", callContext);
-  }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Calculator.mul");
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preRead(ctx, "Calculator.mul");
-  }
-
-  Calculator_mul_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  uint32_t bytes = iprot->getTransport()->readEnd();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postRead(ctx, "Calculator.mul", bytes);
-  }
-
-  Calculator_mul_result result;
-  try {
-    result.success = iface_->mul(args.a, args.b);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    if (this->eventHandler_.get() != NULL) {
-      this->eventHandler_->handlerError(ctx, "Calculator.mul");
-    }
-
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("mul", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->writeEnd();
-    oprot->getTransport()->flush();
-    return;
-  }
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preWrite(ctx, "Calculator.mul");
-  }
-
-  oprot->writeMessageBegin("mul", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  bytes = oprot->getTransport()->writeEnd();
-  oprot->getTransport()->flush();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postWrite(ctx, "Calculator.mul", bytes);
-  }
-}
-
-void CalculatorProcessor::process_div(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
-{
-  void* ctx = NULL;
-  if (this->eventHandler_.get() != NULL) {
-    ctx = this->eventHandler_->getContext("Calculator.div", callContext);
-  }
-  ::apache::thrift::TProcessorContextFreer freer(this->eventHandler_.get(), ctx, "Calculator.div");
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preRead(ctx, "Calculator.div");
-  }
-
-  Calculator_div_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  uint32_t bytes = iprot->getTransport()->readEnd();
-
-  if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postRead(ctx, "Calculator.div", bytes);
-  }
-
-  Calculator_div_result result;
-  try {
-    result.success = iface_->div(args.a, args.b);
+    result.success = iface_->perform(args.o);
     result.__isset.success = true;
   } catch (ArithmeticException &e) {
     result.e = e;
     result.__isset.e = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != NULL) {
-      this->eventHandler_->handlerError(ctx, "Calculator.div");
+      this->eventHandler_->handlerError(ctx, "Calculator.perform");
     }
 
     ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("div", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    oprot->writeMessageBegin("perform", ::apache::thrift::protocol::T_EXCEPTION, seqid);
     x.write(oprot);
     oprot->writeMessageEnd();
     oprot->getTransport()->writeEnd();
@@ -1283,17 +333,17 @@ void CalculatorProcessor::process_div(int32_t seqid, ::apache::thrift::protocol:
   }
 
   if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->preWrite(ctx, "Calculator.div");
+    this->eventHandler_->preWrite(ctx, "Calculator.perform");
   }
 
-  oprot->writeMessageBegin("div", ::apache::thrift::protocol::T_REPLY, seqid);
+  oprot->writeMessageBegin("perform", ::apache::thrift::protocol::T_REPLY, seqid);
   result.write(oprot);
   oprot->writeMessageEnd();
   bytes = oprot->getTransport()->writeEnd();
   oprot->getTransport()->flush();
 
   if (this->eventHandler_.get() != NULL) {
-    this->eventHandler_->postWrite(ctx, "Calculator.div", bytes);
+    this->eventHandler_->postWrite(ctx, "Calculator.perform", bytes);
   }
 }
 

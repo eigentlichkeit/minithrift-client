@@ -2,14 +2,28 @@
 
 namespace cpp foo.bar.baz
 
+enum OperationType {
+    ADD,
+    SUBTRACT,
+    MULTIPLY,
+    DIVIDE
+}
+
+struct Operation {
+    1:OperationType type,
+    2:double op1,
+    3:double op2
+}
+
 exception ArithmeticException {
-	1:string message
+    1:string message
+}
+
+exception IllegalArgumentException {
+    1:string message
 }
 
 service Calculator {
-	double add(1:double a, 2:double b)
-	double sub(1:double a, 2:double b)
-	double mul(1:double a, 2:double b)
-	double div(1:double a, 2:double b) throws (1:ArithmeticException e)
+    double perform(1:Operation o) throws (1:ArithmeticException e)
 }
 

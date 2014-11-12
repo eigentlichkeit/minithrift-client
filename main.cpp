@@ -4,7 +4,9 @@
 
 #include <thrift/transport/TSocket.h>
 #include <thrift/protocol/TBinaryProtocol.h>
+#include <thrift/protocol/TJSONProtocol.h>
 
+#include "calculator_types.h"
 #include "Calculator.h"
 
 using namespace std;
@@ -20,15 +22,31 @@ int main(int argc, char** argv)
 {
     shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
     socket->open();
-    shared_ptr<TBinaryProtocol> protocol(new TBinaryProtocol(socket));
-    CalculatorClient client(protocol);
+    shared_ptr<TJSONProtocol> inputProtocol(new TJSONProtocol(socket));
+    shared_ptr<TJSONProtocol> outputProtocol(new TJSONProtocol(socket));
+    CalculatorClient client(inputProtocol, outputProtocol);
+    Operation o;
 
-    cout << client.add(1, 1) << endl;
-    cout << client.sub(2, 3) << endl ;
-    cout << client.mul(5, 8) << endl;
+    o.type = OperationType::ADD;
+    o.op1 = 1;
+    o.op2 = 1;
+    cout << client.perform(o) << endl;
+    o.type = OperationType::SUBTRACT;
+    o.op1 = 2;
+    o.op2 = 3;
+    cout << client.perform(o) << endl;
+    o.type = OperationType::MULTIPLY;
+    o.op1 = 5;
+    o.op2 = 8;
+    cout << client.perform(o) << endl;
     try {
-        cout << client.div(13, 21) << endl;
-        cout << client.div(34, 0) << endl;
+        o.type = OperationType::DIVIDE;
+        o.op1 = 13;
+        o.op2 = 21;
+        cout << client.perform(o) << endl;
+        o.op1 = 34;
+        o.op2 = 0;
+        cout << client.perform(o) << endl;
     } catch (ArithmeticException& e) {
         cerr << e.message << endl;
     } catch (...) {

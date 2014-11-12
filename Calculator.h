@@ -15,10 +15,7 @@ namespace foo { namespace bar { namespace baz {
 class CalculatorIf {
  public:
   virtual ~CalculatorIf() {}
-  virtual double add(const double a, const double b) = 0;
-  virtual double sub(const double a, const double b) = 0;
-  virtual double mul(const double a, const double b) = 0;
-  virtual double div(const double a, const double b) = 0;
+  virtual double perform(const Operation& o) = 0;
 };
 
 class CalculatorIfFactory {
@@ -48,64 +45,46 @@ class CalculatorIfSingletonFactory : virtual public CalculatorIfFactory {
 class CalculatorNull : virtual public CalculatorIf {
  public:
   virtual ~CalculatorNull() {}
-  double add(const double /* a */, const double /* b */) {
-    double _return = (double)0;
-    return _return;
-  }
-  double sub(const double /* a */, const double /* b */) {
-    double _return = (double)0;
-    return _return;
-  }
-  double mul(const double /* a */, const double /* b */) {
-    double _return = (double)0;
-    return _return;
-  }
-  double div(const double /* a */, const double /* b */) {
+  double perform(const Operation& /* o */) {
     double _return = (double)0;
     return _return;
   }
 };
 
-typedef struct _Calculator_add_args__isset {
-  _Calculator_add_args__isset() : a(false), b(false) {}
-  bool a;
-  bool b;
-} _Calculator_add_args__isset;
+typedef struct _Calculator_perform_args__isset {
+  _Calculator_perform_args__isset() : o(false) {}
+  bool o;
+} _Calculator_perform_args__isset;
 
-class Calculator_add_args {
+class Calculator_perform_args {
  public:
 
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
+  static const char* ascii_fingerprint; // = "D19F1C797C80B4E07CD6CBFF072A3CCD";
+  static const uint8_t binary_fingerprint[16]; // = {0xD1,0x9F,0x1C,0x79,0x7C,0x80,0xB4,0xE0,0x7C,0xD6,0xCB,0xFF,0x07,0x2A,0x3C,0xCD};
 
-  Calculator_add_args(const Calculator_add_args&);
-  Calculator_add_args& operator=(const Calculator_add_args&);
-  Calculator_add_args() : a(0), b(0) {
+  Calculator_perform_args(const Calculator_perform_args&);
+  Calculator_perform_args& operator=(const Calculator_perform_args&);
+  Calculator_perform_args() {
   }
 
-  virtual ~Calculator_add_args() throw();
-  double a;
-  double b;
+  virtual ~Calculator_perform_args() throw();
+  Operation o;
 
-  _Calculator_add_args__isset __isset;
+  _Calculator_perform_args__isset __isset;
 
-  void __set_a(const double val);
+  void __set_o(const Operation& val);
 
-  void __set_b(const double val);
-
-  bool operator == (const Calculator_add_args & rhs) const
+  bool operator == (const Calculator_perform_args & rhs) const
   {
-    if (!(a == rhs.a))
-      return false;
-    if (!(b == rhs.b))
+    if (!(o == rhs.o))
       return false;
     return true;
   }
-  bool operator != (const Calculator_add_args &rhs) const {
+  bool operator != (const Calculator_perform_args &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const Calculator_add_args & ) const;
+  bool operator < (const Calculator_perform_args & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
@@ -113,418 +92,48 @@ class Calculator_add_args {
 };
 
 
-class Calculator_add_pargs {
+class Calculator_perform_pargs {
  public:
 
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
+  static const char* ascii_fingerprint; // = "D19F1C797C80B4E07CD6CBFF072A3CCD";
+  static const uint8_t binary_fingerprint[16]; // = {0xD1,0x9F,0x1C,0x79,0x7C,0x80,0xB4,0xE0,0x7C,0xD6,0xCB,0xFF,0x07,0x2A,0x3C,0xCD};
 
 
-  virtual ~Calculator_add_pargs() throw();
-  const double* a;
-  const double* b;
+  virtual ~Calculator_perform_pargs() throw();
+  const Operation* o;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _Calculator_add_result__isset {
-  _Calculator_add_result__isset() : success(false) {}
-  bool success;
-} _Calculator_add_result__isset;
-
-class Calculator_add_result {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-  Calculator_add_result(const Calculator_add_result&);
-  Calculator_add_result& operator=(const Calculator_add_result&);
-  Calculator_add_result() : success(0) {
-  }
-
-  virtual ~Calculator_add_result() throw();
-  double success;
-
-  _Calculator_add_result__isset __isset;
-
-  void __set_success(const double val);
-
-  bool operator == (const Calculator_add_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_add_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_add_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_add_presult__isset {
-  _Calculator_add_presult__isset() : success(false) {}
-  bool success;
-} _Calculator_add_presult__isset;
-
-class Calculator_add_presult {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-
-  virtual ~Calculator_add_presult() throw();
-  double* success;
-
-  _Calculator_add_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _Calculator_sub_args__isset {
-  _Calculator_sub_args__isset() : a(false), b(false) {}
-  bool a;
-  bool b;
-} _Calculator_sub_args__isset;
-
-class Calculator_sub_args {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-  Calculator_sub_args(const Calculator_sub_args&);
-  Calculator_sub_args& operator=(const Calculator_sub_args&);
-  Calculator_sub_args() : a(0), b(0) {
-  }
-
-  virtual ~Calculator_sub_args() throw();
-  double a;
-  double b;
-
-  _Calculator_sub_args__isset __isset;
-
-  void __set_a(const double val);
-
-  void __set_b(const double val);
-
-  bool operator == (const Calculator_sub_args & rhs) const
-  {
-    if (!(a == rhs.a))
-      return false;
-    if (!(b == rhs.b))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_sub_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_sub_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class Calculator_sub_pargs {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-
-  virtual ~Calculator_sub_pargs() throw();
-  const double* a;
-  const double* b;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_sub_result__isset {
-  _Calculator_sub_result__isset() : success(false) {}
-  bool success;
-} _Calculator_sub_result__isset;
-
-class Calculator_sub_result {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-  Calculator_sub_result(const Calculator_sub_result&);
-  Calculator_sub_result& operator=(const Calculator_sub_result&);
-  Calculator_sub_result() : success(0) {
-  }
-
-  virtual ~Calculator_sub_result() throw();
-  double success;
-
-  _Calculator_sub_result__isset __isset;
-
-  void __set_success(const double val);
-
-  bool operator == (const Calculator_sub_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_sub_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_sub_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_sub_presult__isset {
-  _Calculator_sub_presult__isset() : success(false) {}
-  bool success;
-} _Calculator_sub_presult__isset;
-
-class Calculator_sub_presult {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-
-  virtual ~Calculator_sub_presult() throw();
-  double* success;
-
-  _Calculator_sub_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _Calculator_mul_args__isset {
-  _Calculator_mul_args__isset() : a(false), b(false) {}
-  bool a;
-  bool b;
-} _Calculator_mul_args__isset;
-
-class Calculator_mul_args {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-  Calculator_mul_args(const Calculator_mul_args&);
-  Calculator_mul_args& operator=(const Calculator_mul_args&);
-  Calculator_mul_args() : a(0), b(0) {
-  }
-
-  virtual ~Calculator_mul_args() throw();
-  double a;
-  double b;
-
-  _Calculator_mul_args__isset __isset;
-
-  void __set_a(const double val);
-
-  void __set_b(const double val);
-
-  bool operator == (const Calculator_mul_args & rhs) const
-  {
-    if (!(a == rhs.a))
-      return false;
-    if (!(b == rhs.b))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_mul_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_mul_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class Calculator_mul_pargs {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-
-  virtual ~Calculator_mul_pargs() throw();
-  const double* a;
-  const double* b;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_mul_result__isset {
-  _Calculator_mul_result__isset() : success(false) {}
-  bool success;
-} _Calculator_mul_result__isset;
-
-class Calculator_mul_result {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-  Calculator_mul_result(const Calculator_mul_result&);
-  Calculator_mul_result& operator=(const Calculator_mul_result&);
-  Calculator_mul_result() : success(0) {
-  }
-
-  virtual ~Calculator_mul_result() throw();
-  double success;
-
-  _Calculator_mul_result__isset __isset;
-
-  void __set_success(const double val);
-
-  bool operator == (const Calculator_mul_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_mul_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_mul_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_mul_presult__isset {
-  _Calculator_mul_presult__isset() : success(false) {}
-  bool success;
-} _Calculator_mul_presult__isset;
-
-class Calculator_mul_presult {
- public:
-
-  static const char* ascii_fingerprint; // = "DEC695F0B5B0EB95E4554B301A1D76A4";
-  static const uint8_t binary_fingerprint[16]; // = {0xDE,0xC6,0x95,0xF0,0xB5,0xB0,0xEB,0x95,0xE4,0x55,0x4B,0x30,0x1A,0x1D,0x76,0xA4};
-
-
-  virtual ~Calculator_mul_presult() throw();
-  double* success;
-
-  _Calculator_mul_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _Calculator_div_args__isset {
-  _Calculator_div_args__isset() : a(false), b(false) {}
-  bool a;
-  bool b;
-} _Calculator_div_args__isset;
-
-class Calculator_div_args {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-  Calculator_div_args(const Calculator_div_args&);
-  Calculator_div_args& operator=(const Calculator_div_args&);
-  Calculator_div_args() : a(0), b(0) {
-  }
-
-  virtual ~Calculator_div_args() throw();
-  double a;
-  double b;
-
-  _Calculator_div_args__isset __isset;
-
-  void __set_a(const double val);
-
-  void __set_b(const double val);
-
-  bool operator == (const Calculator_div_args & rhs) const
-  {
-    if (!(a == rhs.a))
-      return false;
-    if (!(b == rhs.b))
-      return false;
-    return true;
-  }
-  bool operator != (const Calculator_div_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Calculator_div_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class Calculator_div_pargs {
- public:
-
-  static const char* ascii_fingerprint; // = "EA2086D2BB14222991D7B0497DE7B58B";
-  static const uint8_t binary_fingerprint[16]; // = {0xEA,0x20,0x86,0xD2,0xBB,0x14,0x22,0x29,0x91,0xD7,0xB0,0x49,0x7D,0xE7,0xB5,0x8B};
-
-
-  virtual ~Calculator_div_pargs() throw();
-  const double* a;
-  const double* b;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Calculator_div_result__isset {
-  _Calculator_div_result__isset() : success(false), e(false) {}
+typedef struct _Calculator_perform_result__isset {
+  _Calculator_perform_result__isset() : success(false), e(false) {}
   bool success;
   bool e;
-} _Calculator_div_result__isset;
+} _Calculator_perform_result__isset;
 
-class Calculator_div_result {
+class Calculator_perform_result {
  public:
 
   static const char* ascii_fingerprint; // = "505FDFAFB3792C9C02EC411D1B8DBD35";
   static const uint8_t binary_fingerprint[16]; // = {0x50,0x5F,0xDF,0xAF,0xB3,0x79,0x2C,0x9C,0x02,0xEC,0x41,0x1D,0x1B,0x8D,0xBD,0x35};
 
-  Calculator_div_result(const Calculator_div_result&);
-  Calculator_div_result& operator=(const Calculator_div_result&);
-  Calculator_div_result() : success(0) {
+  Calculator_perform_result(const Calculator_perform_result&);
+  Calculator_perform_result& operator=(const Calculator_perform_result&);
+  Calculator_perform_result() : success(0) {
   }
 
-  virtual ~Calculator_div_result() throw();
+  virtual ~Calculator_perform_result() throw();
   double success;
   ArithmeticException e;
 
-  _Calculator_div_result__isset __isset;
+  _Calculator_perform_result__isset __isset;
 
   void __set_success(const double val);
 
   void __set_e(const ArithmeticException& val);
 
-  bool operator == (const Calculator_div_result & rhs) const
+  bool operator == (const Calculator_perform_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
@@ -532,35 +141,35 @@ class Calculator_div_result {
       return false;
     return true;
   }
-  bool operator != (const Calculator_div_result &rhs) const {
+  bool operator != (const Calculator_perform_result &rhs) const {
     return !(*this == rhs);
   }
 
-  bool operator < (const Calculator_div_result & ) const;
+  bool operator < (const Calculator_perform_result & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
 };
 
-typedef struct _Calculator_div_presult__isset {
-  _Calculator_div_presult__isset() : success(false), e(false) {}
+typedef struct _Calculator_perform_presult__isset {
+  _Calculator_perform_presult__isset() : success(false), e(false) {}
   bool success;
   bool e;
-} _Calculator_div_presult__isset;
+} _Calculator_perform_presult__isset;
 
-class Calculator_div_presult {
+class Calculator_perform_presult {
  public:
 
   static const char* ascii_fingerprint; // = "505FDFAFB3792C9C02EC411D1B8DBD35";
   static const uint8_t binary_fingerprint[16]; // = {0x50,0x5F,0xDF,0xAF,0xB3,0x79,0x2C,0x9C,0x02,0xEC,0x41,0x1D,0x1B,0x8D,0xBD,0x35};
 
 
-  virtual ~Calculator_div_presult() throw();
+  virtual ~Calculator_perform_presult() throw();
   double* success;
   ArithmeticException e;
 
-  _Calculator_div_presult__isset __isset;
+  _Calculator_perform_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -591,18 +200,9 @@ class CalculatorClient : virtual public CalculatorIf {
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> getOutputProtocol() {
     return poprot_;
   }
-  double add(const double a, const double b);
-  void send_add(const double a, const double b);
-  double recv_add();
-  double sub(const double a, const double b);
-  void send_sub(const double a, const double b);
-  double recv_sub();
-  double mul(const double a, const double b);
-  void send_mul(const double a, const double b);
-  double recv_mul();
-  double div(const double a, const double b);
-  void send_div(const double a, const double b);
-  double recv_div();
+  double perform(const Operation& o);
+  void send_perform(const Operation& o);
+  double recv_perform();
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot_;
@@ -618,17 +218,11 @@ class CalculatorProcessor : public ::apache::thrift::TDispatchProcessor {
   typedef  void (CalculatorProcessor::*ProcessFunction)(int32_t, ::apache::thrift::protocol::TProtocol*, ::apache::thrift::protocol::TProtocol*, void*);
   typedef std::map<std::string, ProcessFunction> ProcessMap;
   ProcessMap processMap_;
-  void process_add(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
-  void process_sub(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
-  void process_mul(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
-  void process_div(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_perform(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
   CalculatorProcessor(boost::shared_ptr<CalculatorIf> iface) :
     iface_(iface) {
-    processMap_["add"] = &CalculatorProcessor::process_add;
-    processMap_["sub"] = &CalculatorProcessor::process_sub;
-    processMap_["mul"] = &CalculatorProcessor::process_mul;
-    processMap_["div"] = &CalculatorProcessor::process_div;
+    processMap_["perform"] = &CalculatorProcessor::process_perform;
   }
 
   virtual ~CalculatorProcessor() {}
@@ -657,40 +251,13 @@ class CalculatorMultiface : virtual public CalculatorIf {
     ifaces_.push_back(iface);
   }
  public:
-  double add(const double a, const double b) {
+  double perform(const Operation& o) {
     size_t sz = ifaces_.size();
     size_t i = 0;
     for (; i < (sz - 1); ++i) {
-      ifaces_[i]->add(a, b);
+      ifaces_[i]->perform(o);
     }
-    return ifaces_[i]->add(a, b);
-  }
-
-  double sub(const double a, const double b) {
-    size_t sz = ifaces_.size();
-    size_t i = 0;
-    for (; i < (sz - 1); ++i) {
-      ifaces_[i]->sub(a, b);
-    }
-    return ifaces_[i]->sub(a, b);
-  }
-
-  double mul(const double a, const double b) {
-    size_t sz = ifaces_.size();
-    size_t i = 0;
-    for (; i < (sz - 1); ++i) {
-      ifaces_[i]->mul(a, b);
-    }
-    return ifaces_[i]->mul(a, b);
-  }
-
-  double div(const double a, const double b) {
-    size_t sz = ifaces_.size();
-    size_t i = 0;
-    for (; i < (sz - 1); ++i) {
-      ifaces_[i]->div(a, b);
-    }
-    return ifaces_[i]->div(a, b);
+    return ifaces_[i]->perform(o);
   }
 
 };
