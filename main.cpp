@@ -39,18 +39,22 @@ int main(int argc, char** argv)
     o.op1 = 5;
     o.op2 = 8;
     cout << client.perform(o) << endl;
+    o.type = OperationType::DIVIDE;
+    o.op1 = 13;
+    o.op2 = 21;
+    cout << client.perform(o) << endl;
     try {
-        o.type = OperationType::DIVIDE;
-        o.op1 = 13;
-        o.op2 = 21;
-        cout << client.perform(o) << endl;
         o.op1 = 34;
         o.op2 = 0;
         cout << client.perform(o) << endl;
     } catch (ArithmeticException& e) {
         cerr << e.message << endl;
-    } catch (...) {
-        cerr << "Unknown exception!" << endl;
+    }
+    try {
+        o.type = static_cast<OperationType::type>(4);
+        cout << client.perform(o) << endl;
+    } catch (IllegalArgumentException& e) {
+        cerr << e.message << endl;
     }
 
     return 0;

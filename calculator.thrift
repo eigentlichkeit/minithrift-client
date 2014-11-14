@@ -24,6 +24,7 @@ exception IllegalArgumentException {
 }
 
 service Calculator {
-    double perform(1:Operation o) throws (1:ArithmeticException e)
+    double perform(1:Operation o) throws (1:ArithmeticException ae,
+                                          2:IllegalArgumentException iae)
 }
 

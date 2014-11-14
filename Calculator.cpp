@@ -119,8 +119,16 @@ uint32_t Calculator_perform_result::read(::apache::thrift::protocol::TProtocol* 
         break;
       case 1:
         if (ftype == ::apache::thrift::protocol::T_STRUCT) {
-          xfer += this->e.read(iprot);
-          this->__isset.e = true;
+          xfer += this->ae.read(iprot);
+          this->__isset.ae = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->iae.read(iprot);
+          this->__isset.iae = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -147,9 +155,13 @@ uint32_t Calculator_perform_result::write(::apache::thrift::protocol::TProtocol*
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_DOUBLE, 0);
     xfer += oprot->writeDouble(this->success);
     xfer += oprot->writeFieldEnd();
-  } else if (this->__isset.e) {
-    xfer += oprot->writeFieldBegin("e", ::apache::thrift::protocol::T_STRUCT, 1);
-    xfer += this->e.write(oprot);
+  } else if (this->__isset.ae) {
+    xfer += oprot->writeFieldBegin("ae", ::apache::thrift::protocol::T_STRUCT, 1);
+    xfer += this->ae.write(oprot);
+    xfer += oprot->writeFieldEnd();
+  } else if (this->__isset.iae) {
+    xfer += oprot->writeFieldBegin("iae", ::apache::thrift::protocol::T_STRUCT, 2);
+    xfer += this->iae.write(oprot);
     xfer += oprot->writeFieldEnd();
   }
   xfer += oprot->writeFieldStop();
@@ -192,8 +204,16 @@ uint32_t Calculator_perform_presult::read(::apache::thrift::protocol::TProtocol*
         break;
       case 1:
         if (ftype == ::apache::thrift::protocol::T_STRUCT) {
-          xfer += this->e.read(iprot);
-          this->__isset.e = true;
+          xfer += this->ae.read(iprot);
+          this->__isset.ae = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->iae.read(iprot);
+          this->__isset.iae = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -265,8 +285,11 @@ double CalculatorClient::recv_perform()
   if (result.__isset.success) {
     return _return;
   }
-  if (result.__isset.e) {
-    throw result.e;
+  if (result.__isset.ae) {
+    throw result.ae;
+  }
+  if (result.__isset.iae) {
+    throw result.iae;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "perform failed: unknown result");
 }
@@ -315,9 +338,12 @@ void CalculatorProcessor::process_perform(int32_t seqid, ::apache::thrift::proto
   try {
     result.success = iface_->perform(args.o);
     result.__isset.success = true;
-  } catch (ArithmeticException &e) {
-    result.e = e;
-    result.__isset.e = true;
+  } catch (ArithmeticException &ae) {
+    result.ae = ae;
+    result.__isset.ae = true;
+  } catch (IllegalArgumentException &iae) {
+    result.iae = iae;
+    result.__isset.iae = true;
   } catch (const std::exception& e) {
     if (this->eventHandler_.get() != NULL) {
       this->eventHandler_->handlerError(ctx, "Calculator.perform");

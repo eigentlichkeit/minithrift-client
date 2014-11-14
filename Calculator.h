@@ -107,16 +107,17 @@ class Calculator_perform_pargs {
 };
 
 typedef struct _Calculator_perform_result__isset {
-  _Calculator_perform_result__isset() : success(false), e(false) {}
+  _Calculator_perform_result__isset() : success(false), ae(false), iae(false) {}
   bool success;
-  bool e;
+  bool ae;
+  bool iae;
 } _Calculator_perform_result__isset;
 
 class Calculator_perform_result {
  public:
 
-  static const char* ascii_fingerprint; // = "505FDFAFB3792C9C02EC411D1B8DBD35";
-  static const uint8_t binary_fingerprint[16]; // = {0x50,0x5F,0xDF,0xAF,0xB3,0x79,0x2C,0x9C,0x02,0xEC,0x41,0x1D,0x1B,0x8D,0xBD,0x35};
+  static const char* ascii_fingerprint; // = "61B657542C2D21FED4B38119FE804DB5";
+  static const uint8_t binary_fingerprint[16]; // = {0x61,0xB6,0x57,0x54,0x2C,0x2D,0x21,0xFE,0xD4,0xB3,0x81,0x19,0xFE,0x80,0x4D,0xB5};
 
   Calculator_perform_result(const Calculator_perform_result&);
   Calculator_perform_result& operator=(const Calculator_perform_result&);
@@ -125,19 +126,24 @@ class Calculator_perform_result {
 
   virtual ~Calculator_perform_result() throw();
   double success;
-  ArithmeticException e;
+  ArithmeticException ae;
+  IllegalArgumentException iae;
 
   _Calculator_perform_result__isset __isset;
 
   void __set_success(const double val);
 
-  void __set_e(const ArithmeticException& val);
+  void __set_ae(const ArithmeticException& val);
+
+  void __set_iae(const IllegalArgumentException& val);
 
   bool operator == (const Calculator_perform_result & rhs) const
   {
     if (!(success == rhs.success))
       return false;
-    if (!(e == rhs.e))
+    if (!(ae == rhs.ae))
+      return false;
+    if (!(iae == rhs.iae))
       return false;
     return true;
   }
@@ -153,21 +159,23 @@ class Calculator_perform_result {
 };
 
 typedef struct _Calculator_perform_presult__isset {
-  _Calculator_perform_presult__isset() : success(false), e(false) {}
+  _Calculator_perform_presult__isset() : success(false), ae(false), iae(false) {}
   bool success;
-  bool e;
+  bool ae;
+  bool iae;
 } _Calculator_perform_presult__isset;
 
 class Calculator_perform_presult {
  public:
 
-  static const char* ascii_fingerprint; // = "505FDFAFB3792C9C02EC411D1B8DBD35";
-  static const uint8_t binary_fingerprint[16]; // = {0x50,0x5F,0xDF,0xAF,0xB3,0x79,0x2C,0x9C,0x02,0xEC,0x41,0x1D,0x1B,0x8D,0xBD,0x35};
+  static const char* ascii_fingerprint; // = "61B657542C2D21FED4B38119FE804DB5";
+  static const uint8_t binary_fingerprint[16]; // = {0x61,0xB6,0x57,0x54,0x2C,0x2D,0x21,0xFE,0xD4,0xB3,0x81,0x19,0xFE,0x80,0x4D,0xB5};
 
 
   virtual ~Calculator_perform_presult() throw();
   double* success;
-  ArithmeticException e;
+  ArithmeticException ae;
+  IllegalArgumentException iae;
 
   _Calculator_perform_presult__isset __isset;
 
